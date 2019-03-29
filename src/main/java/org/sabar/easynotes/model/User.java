@@ -31,7 +31,6 @@ public class User extends AuditModel {
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.PERSIST })
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "ad_user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "ad_role_id") })
-	@JsonManagedReference
 	private Set<Role> roles = new HashSet<>();
 
 	public User() {
