@@ -1,4 +1,4 @@
-package org.sabar.easynote;
+package org.sabar.easynotes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
