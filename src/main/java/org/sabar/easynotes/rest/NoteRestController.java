@@ -20,7 +20,7 @@ import org.sabar.easynotes.model.Note;
 import org.sabar.easynotes.repository.NoteRepository;
 
 @RestController
-@RequestMapping("/api/notes")
+@RequestMapping("/api/note")
 public class NoteRestController {
 
 	@Autowired

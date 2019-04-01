@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "notes")
+@Table(name = "m_note")
 public class Note extends AuditModel {
 
 	@Id

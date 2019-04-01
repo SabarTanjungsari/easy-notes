@@ -17,7 +17,7 @@ import org.springframework.lang.NonNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "m_comment")
 public class Comment extends AuditModel{
 
 	@Id

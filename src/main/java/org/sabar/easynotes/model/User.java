@@ -28,6 +28,12 @@ public class User extends AuditModel {
 	@Column(unique = true)
 	private String name;
 
+	@Column(nullable = false)
+	private String password;
+	
+	@Column(name = "active", nullable = false)
+	private boolean enabled = true;
+	
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.PERSIST })
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "ad_user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "ad_role_id") })
@@ -57,6 +63,22 @@ public class User extends AuditModel {
 
 	public void setName(String name) {
 		this.name = name;
+	}	
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public Set<Role> getRoles() {

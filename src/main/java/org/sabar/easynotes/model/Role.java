@@ -29,6 +29,9 @@ public class Role extends AuditModel {
 	@Column(unique = true)
 	private String name;
 
+	@Column(name = "active", nullable = false)
+	private boolean enabled = true;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "roles")
 	@JsonBackReference
 	private Set<User> users = new HashSet<>();
@@ -64,4 +67,12 @@ public class Role extends AuditModel {
 		this.users = users;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
 }
