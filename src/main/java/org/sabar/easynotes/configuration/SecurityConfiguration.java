@@ -1,5 +1,7 @@
 package org.sabar.easynotes.configuration;
 
+import javax.sql.DataSource;
+
 import org.sabar.easynotes.exception.LoggingAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,25 +19,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private LoggingAccessDeniedHandler accessDeniedHandler;
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/js/**", "/css/**", "/images/**", "/fonts/**").permitAll()
-				.antMatchers("/user/**").hasRole("USER").anyRequest().authenticated().and().formLogin()
-				.defaultSuccessUrl("/", true).loginPage("/login").permitAll().and().logout()
-				.invalidateHttpSession(true).clearAuthentication(true)
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-	}
+	@Autowired
+	private DataSource dataSource;
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-				/**/
-				.withUser("user").password(passwordEncoder().encode("password")).roles("USER")
-				/**/
-				.and()
-				/**/
-				.withUser("manager").password(passwordEncoder().encode("password")).roles("MANAGER");
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				/* Permit ALL */
+				.antMatchers("/", "/js/**", "/css/**", "/images/**", "/fonts/**").permitAll()
+				/* Access USER Role */
+				.antMatchers("/user/**").hasRole("ADMIN").anyRequest().authenticated()
+				/* Login Rule */
+				.and().formLogin().defaultSuccessUrl("/", true).loginPage("/login").permitAll()
+				/* Logout Rule */
+				.and().logout().invalidateHttpSession(true).clearAuthentication(true)
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
+				.permitAll()
+				/* Handling */
+				.and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.jdbcAuthentication().dataSource(dataSource)
+				.authoritiesByUsernameQuery("SELECT usr.name AS username, rl.name AS role "
+						+ "FROM ad_user usr JOIN user_role ur ON ur.ad_user_id = usr.ad_user_id "
+						+ "JOIN ad_role rl ON rl.ad_role_id = ur.ad_role_id "
+						+ "WHERE usr.active = 'Y' AND rl.active = 'Y'AND usr.name=?")
+				.usersByUsernameQuery(
+						"select name AS username, password, active as enabled  from ad_user WHERE active = 'Y' AND name=?");
 	}
 
 	@Bean
