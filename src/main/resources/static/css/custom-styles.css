@@ -1,0 +1,15 @@
+h1 {
+	color: #78ab46;
+}
+
+footer {
+	position: fixed;
+	height: 50pt;
+	bottom: 0pt;
+	width: 100%;
+	background-color: @ccc;
+}
+
+footer p {
+	padding: 15pt;
+}
