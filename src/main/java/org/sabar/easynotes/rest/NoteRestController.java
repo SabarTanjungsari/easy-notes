@@ -1,5 +1,6 @@
 package org.sabar.easynotes.rest;
 
+import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.sabar.easynotes.exception.ResourceNotFoundException;
 import org.sabar.easynotes.model.Note;
 import org.sabar.easynotes.repository.NoteRepository;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/api/note")
@@ -30,8 +33,8 @@ public class NoteRestController {
 	 * Get All Notes
 	 */
 	@GetMapping()
-	public Page<Note> getAllNotes(Pageable pageable) {
-		return noteRepository.findAll(pageable);
+	public List<Note> getAllNotes(Model model) {
+		return noteRepository.findAll();
 	}
 
 	/**
@@ -58,7 +61,6 @@ public class NoteRestController {
 		Note note = noteRepository.findById(noteId)
 				.orElseThrow(() -> new ResourceNotFoundException("Note", "id", noteId));
 		note.setTitle(noteDetails.getTitle());
-		note.setContent(noteDetails.getContent());
 
 		Note updateNote = noteRepository.save(note);
 		return updateNote;

@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/themes.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/custom-styles.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.dataTables.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/themes.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/custom-styles.css}"/>
+        
+        <script type="text/javascript" th:src="@{/js/jquery-3.3.1.js}"></script>
+        <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>        
+        <script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/custom-jquery.js}"></script>
 
-    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Easy Notes</title>
-</head>
-<body>
+        <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Easy Notes</title>
+    </head>
+    <body>
     <th:block th:replace="fragments/header :: header"/>
     <div class="container">
         <th:block layout:fragment="content"/>

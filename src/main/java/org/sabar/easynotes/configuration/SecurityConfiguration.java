@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable().authorizeRequests().antMatchers("/js/**", "/css/**", "/images/**", "/fonts/**")
                 .permitAll().antMatchers("/admin/**").hasAnyRole("ADMIN").antMatchers("/user/**").hasAnyRole("USER")
-                .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
+                .anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/note/all").permitAll().and().logout()
                 .permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
 
