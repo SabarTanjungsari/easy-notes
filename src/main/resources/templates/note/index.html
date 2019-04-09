@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+    <head>
+        <title>List All Note</title>
+    </head>
+    <body>
+        <div layout:fragment="content" th:remove="tag">
+            <h3>List all note by createdby</h3>
+            <table id="noteTable" class="table table-condensed display">
+
+                <!-- Header Table -->
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>title</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </body>
+</html>
