@@ -20,16 +20,46 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav" sec:authorize="hasRole('ROLE_USER')">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         </ul>
-                        
+
                         <ul class="nav navbar-nav" sec:authorize="hasRole('ROLE_ADMIN')">
-                            <li><a href="#">Api</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="glyphicon glyphicon-cog"></i>
+                                    Master Data <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/admin/user/all"><i class="glyphicon glyphicon-lock"></i> User</a></li>
+                                    <li><a href="/admin/status/all"><i class="glyphicon glyphicon-comment"></i> Status</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a th:href="@{/logout}">Sign Out</a></li>
+                        <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
+                            <li class="dropdown" id="user">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span sec:authentication="name"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a>
+                                            <i class="glyphicon glyphicon-star"></i>
+                                            <span class="text-muted" sec:authentication="principal.authorities"></span>
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a th:href="@{/logout}">
+                                            <i class="glyphicon glyphicon-log-out"></i> Sign Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <!--/.nav-collapse -->

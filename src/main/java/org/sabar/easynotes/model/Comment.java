@@ -15,6 +15,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "m_comment")
@@ -22,15 +23,15 @@ public class Comment extends AuditModel{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "m_comment_id")
 	private Long id;
 	
 	@NonNull
 	@Lob
-	private String text;
-	
+	private String text;	
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "note_id", nullable = false)
+	@JoinColumn(name = "c_note_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Note note;
