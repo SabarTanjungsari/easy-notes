@@ -20,18 +20,18 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav" sec:authorize="hasRole('ROLE_USER')">
-                            <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                            <li class="active"><a href="#"><span class="fa fa-home"></span> Home</a></li>
                         </ul>
 
                         <ul class="nav navbar-nav" sec:authorize="hasRole('ROLE_ADMIN')">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="glyphicon glyphicon-cog"></i>
+                                    <i class="fa fa-database"></i>
                                     Master Data <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/admin/user/all"><i class="glyphicon glyphicon-lock"></i> User</a></li>
-                                    <li><a href="/admin/status/all"><i class="glyphicon glyphicon-comment"></i> Status</a></li>
+                                    <li><a href="/admin/user/all"><i class="fa fa-users"></i> User</a></li>
+                                    <li><a href="/admin/status/all"><i class="fa fa-comments-o"></i> Status</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">Separated link</a></li>
                                     <li role="separator" class="divider"></li>

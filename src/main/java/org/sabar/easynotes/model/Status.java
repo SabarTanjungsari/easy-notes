@@ -24,6 +24,9 @@ public class Status extends AuditModel {
     @Column(name = "active", nullable = false)
     private boolean enabled = true;
 
+    public Status() {
+    }
+    
     public Long getId() {
         return id;
     }
